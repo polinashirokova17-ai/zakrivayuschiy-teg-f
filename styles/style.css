@@ -13,4 +13,21 @@
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  font-family: var(--text-font);
+  font-variation-settings: "wght" var(--font-weight-normal), "opsz" var(--font-size);
+}
+
+.header {
+  block-size: 100vb;
+  min-block-size: 667px;
+  font-family: var(--accent-font);
+}
+
+.header__title {
+  font-size: 65px;
+  line-height: 100%;
+  text-transform: uppercase;
 }
