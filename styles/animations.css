@@ -9,3 +9,104 @@
 ✦ button__text — для обозначения текстового элемента внутри кнопки
 
 */
+
+/* Keyframes для анимаций сердца */
+
+/* Анимация масштабирования сердца */
+@keyframes scale-heart {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
+}
+
+/* Анимация искр */
+@keyframes sparks {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Базовые стили для иконки сердца */
+.like-icon {
+  display: block;
+  transform-origin: center;
+  width: 39px;
+  height: 36px;
+}
+
+/* Состояние по умолчанию */
+.like-icon .contour {
+  fill: var(--contour-color);
+  transition: fill 0.1s linear;
+}
+
+.like-icon .core {
+  fill: transparent;
+  transition: fill 0.3s linear 0.03s;
+}
+
+.like-icon .main-body {
+  fill: transparent;
+  transition: fill 0.3s linear;
+}
+
+.like-icon .sparks {
+  opacity: 0;
+}
+
+/* Состояние :hover (наведение) */
+.like-icon:hover .core {
+  fill: var(--contour-color);
+  transition-delay: 0s;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--contour-color);
+  transition-delay: 0.05s;
+}
+
+/* Состояние :active (нажатие и удержание) */
+.like-icon:active .core {
+  fill: var(--animation-fill-color);
+  transition-delay: 0s;
+}
+
+.like-icon:active .main-body {
+  fill: var(--animation-fill-color);
+  transition-delay: 0.05s;
+}
+
+/* Состояние is-liked (клик) */
+.like-icon.is-liked .core {
+  fill: var(--animation-fill-color);
+  transition-delay: 0s;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--animation-fill-color);
+  transition-delay: 0.05s;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--animation-fill-color);
+  transition: fill 0.3s linear 0.06s;
+}
+
+/* Анимация масштабирования при клике */
+.like-icon.is-liked .heart {
+  animation: scale-heart 0.3s ease-in 0.1s 1 alternate;
+}
+
+/* Анимация искр при клике */
+.like-icon.is-liked .sparks {
+  animation: sparks 0.3s ease-in 0.3s 1 alternate;
+}

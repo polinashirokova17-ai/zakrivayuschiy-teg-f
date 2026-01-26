@@ -1,6 +1,13 @@
 /* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
 :root {
+  --main-width: clamp(375px, 100%, 700px);
+
   --bg-color: rgba(255, 255, 255, 1);
+  --label-text-color: rgba(255, 255, 255, 1);
+  --label-stroke-color: rgba(0, 0, 0, 1);
+  --animation-fill-color: rgba(255, 0, 0, 1);
+  --contour-color: rgba(0, 0, 0, 1);
+
 
   --page-bg-gradient: 
     repeating-linear-gradient(90deg, #d3d3d3 0 2px, transparent 2px 4px),

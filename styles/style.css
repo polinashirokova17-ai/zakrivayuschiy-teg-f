@@ -30,6 +30,8 @@
 
 .header__container {
   height: 327px;
+  width: var(--main-width);
+  margin: 0 auto;
   display: flex;
   gap: 20px;
   flex-direction: column;
@@ -40,7 +42,7 @@
 }
 
 .header__title {
-  font-size: 49px;
+  font-size: clamp(3.0625rem, 2.7104rem + 1.5023vw, 4.0625rem);
   line-height: 100%;
   text-transform: uppercase;
 }
@@ -60,6 +62,8 @@
 
 .card {
   border: var(--border);
+  width: var(--main-width);
+  margin: 0 auto;
 }
 
 .card__title {
@@ -73,6 +77,35 @@
   border-top: var(--border);
   border-bottom: var(--border);
   overflow: hidden;
+}
+
+.card__image-label {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  font-family: var(--accent-font);
+  font-size: var(--font-size-botton);
+  color: var(--label-stroke-color);
+  opacity: 0.5;
+  mix-blend-mode: hard-light;
+  z-index: 1;
+  text-transform: uppercase;
+
+  text-shadow:
+    -1px 0 var(--label-text-color),
+    0 1px var(--label-text-color),
+    1px 0 var(--label-text-color),
+    0 -1px var(--label-text-color);
+}
+
+@supports (
+  (text-stroke: 1px var(--label-text-color)) or
+    (-webkit-text-stroke: 1px var(--label-text-color))
+) {
+  .card__image-label {
+    -webkit-text-stroke: 1px var(--label-text-color);
+    text-shadow: none;
+  }
 }
 
 .card__image {
@@ -166,6 +199,7 @@
   margin: 0 35px 100px;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .icon-floppy {
@@ -173,7 +207,130 @@
   height: 28px;
 }
 
-.main__button-text {
+.text-design {
   padding: 15px 10px;
   font-size: var(--font-size-botton);
+}
+
+.dialog {
+  display: none;
+}
+
+.dialog[open] {
+  display: grid;
+}
+
+.dialog[open] .dialog__content {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+}
+
+.page:has(.dialog[open]) {
+  overflow: hidden;
+}
+
+.dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+}
+
+.card__like-button,
+.main__button,
+.dialog__button {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+
+/* Эффект фокуса - тень */
+.card__like-button:focus,
+.main__button:focus,
+.dialog__button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--accent-color, #000);
+}
+
+/* Псевдоэлемент для эффекта наведения */
+.card__like-button::before,
+.main__button::before,
+.dialog__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color, #000);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.card__like-button:hover::before,
+.main__button:hover::before,
+.dialog__button:hover::before {
+  transform: translateX(0);
+}
+
+.card__like-button .button__text,
+.main__button .button__text,
+.dialog__button .button__text {
+  position: relative;
+  z-index: 1;
+  color: var(--label-text-color);
+  mix-blend-mode: difference;
+  transition: color 0.5s ease-in-out;
+}
+
+.main__button svg {
+  position: relative;
+  z-index: 1;
+}
+
+.main__button:hover svg rect {
+  fill: var(--label-text-color);
+  transition: fill 0.1s ease-in-out 0.4s;
+}
+
+.card__icon-button {
+  background: transparent;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card__icon-button:focus-visible {
+  outline: none;
+  border-color: var(--accent-color, #000);
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+@media (width <= 375px) {
+  .header__container {
+    height: 327px;
+  }
+  
+  .main__button {
+    width: 306px;
+    height: 84px;
+    margin: 0 auto 100px;
+  }
+  
+  .card__content {
+    padding: 25px 25px 0;
+  }
+  
+  .card__actions {
+    padding: 25px;
+  }
+  
+  .dialog {
+    max-width: 341px;
+    margin: auto;
+  }
 }
