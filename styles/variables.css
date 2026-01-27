@@ -2,11 +2,12 @@
 :root {
   --main-width: clamp(375px, 100%, 700px);
 
-  --bg-color: rgba(255, 255, 255, 1);
+ --bg-color: rgba(255, 255, 255, 1);
   --label-text-color: rgba(255, 255, 255, 1);
   --label-stroke-color: rgba(0, 0, 0, 1);
   --animation-fill-color: rgba(255, 0, 0, 1);
   --contour-color: rgba(0, 0, 0, 1);
+  --accent-color: rgba(0, 0, 0, 1);
 
 
   --page-bg-gradient: 
@@ -18,7 +19,7 @@
   --accent-font: "PressStart2P", sans-serif;
 
   --font-size: 18px;
-  --font-size-botton: 14px;
+  --font-size-bottom: 14px;
   --font-weight-normal: 400;
   --font-weight-bold: 700;
 

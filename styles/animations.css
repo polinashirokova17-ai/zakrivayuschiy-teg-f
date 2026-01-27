@@ -10,20 +10,20 @@
 
 */
 
-/* Keyframes для анимаций сердца */
-
-/* Анимация масштабирования сердца */
-@keyframes scale-heart {
+@keyframes scale-animation {
   0% {
     transform: scale(1);
   }
-  100% {
+  50% {
     transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 
 /* Анимация искр */
-@keyframes sparks {
+@keyframes sparks-animation {
   0% {
     opacity: 0;
   }
@@ -35,78 +35,83 @@
   }
 }
 
-/* Базовые стили для иконки сердца */
+/* Стили для анимаций сердца */
 .like-icon {
-  display: block;
   transform-origin: center;
-  width: 39px;
-  height: 36px;
 }
 
-/* Состояние по умолчанию */
+/* 1. НАЧАЛЬНОЕ СОСТОЯНИЕ: прозрачная середина, черная обводка */
 .like-icon .contour {
   fill: var(--contour-color);
   transition: fill 0.1s linear;
 }
 
 .like-icon .core {
-  fill: transparent;
-  transition: fill 0.3s linear 0.03s;
+  fill: transparent; /* Прозрачная середина */
+  transition: fill 0.3s 0.03s linear;
 }
 
 .like-icon .main-body {
-  fill: transparent;
+  fill: transparent; /* Прозрачное тело */
   transition: fill 0.3s linear;
 }
 
+/* Искры - скрыты по умолчанию */
 .like-icon .sparks {
   opacity: 0;
+  fill: var(--animation-fill-color);
 }
 
-/* Состояние :hover (наведение) */
+/* 2. ХОВЕР-ЭФФЕКТ: черная середина и черная обводка */
 .like-icon:hover .core {
   fill: var(--contour-color);
-  transition-delay: 0s;
+  transition: fill 0.3s linear;
 }
 
 .like-icon:hover .main-body {
   fill: var(--contour-color);
-  transition-delay: 0.05s;
+  transition: fill 0.3s 0.05s linear;
 }
 
-/* Состояние :active (нажатие и удержание) */
+/* Контур при ховере остается черным (уже и так) */
+
+/* 3. ЗАЖАТИЕ (active): черная обводка, красная середина */
 .like-icon:active .core {
-  fill: var(--animation-fill-color);
-  transition-delay: 0s;
+  fill: var(--contour-color);
+  transition: fill 0.3s linear;
 }
 
 .like-icon:active .main-body {
-  fill: var(--animation-fill-color);
-  transition-delay: 0.05s;
+  fill: var(--animation-fill-color); /* Красное тело */
+  transition: fill 0.3s 0.05s linear;
 }
 
-/* Состояние is-liked (клик) */
+/* Контур при зажатии остается черным */
+.like-icon:active .contour {
+  fill: var(--contour-color); /* Черная обводка */
+}
+
+/* 1. АНИМАЦИЯ ЛАЙКА (is-liked): красная середина и красная обводка */
 .like-icon.is-liked .core {
-  fill: var(--animation-fill-color);
-  transition-delay: 0s;
+  fill: var(--animation-fill-color); /* Красная середина */
+  transition: fill 0.3s linear;
 }
 
 .like-icon.is-liked .main-body {
-  fill: var(--animation-fill-color);
-  transition-delay: 0.05s;
+  fill: var(--animation-fill-color); /* Красное тело */
+  transition: fill 0.3s 0.05s linear;
 }
 
 .like-icon.is-liked .contour {
-  fill: var(--animation-fill-color);
-  transition: fill 0.3s linear 0.06s;
+  fill: var(--animation-fill-color); /* Красная обводка! */
+  transition: fill 0.3s 0.06s linear;
 }
 
-/* Анимация масштабирования при клике */
+/* Анимации для активного состояния (лайк поставлен) */
 .like-icon.is-liked .heart {
-  animation: scale-heart 0.3s ease-in 0.1s 1 alternate;
+  animation: scale-animation 0.3s ease-in 0.1s;
 }
 
-/* Анимация искр при клике */
 .like-icon.is-liked .sparks {
-  animation: sparks 0.3s ease-in 0.3s 1 alternate;
+  animation: sparks-animation 0.3s ease-in 0.3s;
 }

@@ -50,7 +50,7 @@
 .header__title-text {
   line-height: 100%;
   text-transform: uppercase;
-  font-size: var(--font-size-botton);
+  font-size: var(--font-size-bottom);
 }
 
 .main {
@@ -84,7 +84,7 @@
   top: 25px;
   right: 25px;
   font-family: var(--accent-font);
-  font-size: var(--font-size-botton);
+  font-size: var(--font-size-bottom);
   color: var(--label-stroke-color);
   opacity: 0.5;
   mix-blend-mode: hard-light;
@@ -159,26 +159,31 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
   padding: 25px;
   font-family: var(--accent-font);
-  font-size: var(--font-size-botton);
+  font-size: var(--font-size-bottom);
   line-height: 90%;
 }
 
 .card__icon-button {
   background: transparent;
-  border: none;
+  border: 2px solid transparent;
   padding: 0;
   cursor: pointer;
+  transition: var(--bg-color) 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
-.like-icon {
-  width: 27px;
-  height: 27px;
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: var(--accent-color);
 }
 
 .card__like-button {
@@ -187,6 +192,76 @@
   width: 130px;
   height: 38px;
   padding: 9px 17px;
+}
+
+.card__like-button,
+.main__button,
+.dialog__button {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: var(--border);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Эффект фокуса для кнопок */
+.card__like-button:focus,
+.main__button:focus,
+.dialog__button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--accent-color);
+}
+
+/* Псевдоэлемент для эффекта наведения */
+.card__like-button::before,
+.main__button::before,
+.dialog__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
+}
+
+/* Эффект наведения */
+.card__like-button:hover::before,
+.main__button:hover::before,
+.dialog__button:hover::before {
+  transform: translateX(0);
+}
+
+/* Общие стили для текста и иконок внутри кнопок */
+.card__like-button .button__text,
+.dialog__button .button__text,
+.main__button .button__text,
+.main__button .icon-floppy {
+  position: relative;
+  z-index: 1;
+  color: var(--accent-color);
+  transition: color 0.5s ease-in-out;
+}
+
+/* Эффект наведения - белый текст/иконки на черном фоне */
+.main__button .icon-floppy {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  fill: var(--accent-color);
+  transition: fill 0.5s ease-in-out;
+}
+
+.card__like-button:hover .button__text,
+.main__button:hover .button__text,
+.main__button:hover .icon-floppy {
+  color: var(--bg-color);
+  fill: var(--bg-color);
 }
 
 .main__button {
@@ -200,61 +275,83 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-}
-
-.icon-floppy {
-  width: 28px;
-  height: 28px;
+  position: relative;
+  overflow: hidden;
 }
 
 .text-design {
   padding: 15px 10px;
-  font-size: var(--font-size-botton);
+  font-size: var(--font-size-bottom);
 }
 
 .dialog {
+  border: var(--border);
+  padding: 0;
+  background-color: var(--bg-color);
+  max-width: 357px;
+  margin: auto;
+
+  /* Скрываем по умолчанию - popover API сам управляет отображением */
   display: none;
 }
 
-.dialog[open] {
-  display: grid;
+/* Когда popover открыт */
+.dialog:popover-open {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 40px;
+  top: 236px;
+  font-size: var(--font-size-bottom);
 }
 
-.dialog[open] .dialog__content {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 20px;
-}
-
-.page:has(.dialog[open]) {
-  overflow: hidden;
-}
-
+/* Стили для backdrop через псевдоэлемент */
 .dialog::backdrop {
-  background-color: rgb(0 0 0 / 0.75);
+  background-color: rgba(0, 0, 0, 0.75);
 }
 
-.card__like-button,
-.main__button,
+.dialog__content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dialog__text {
+  font-family: var(--accent-font);
+  font-size: var(--font-size-bottom);
+  line-height: 150%;
+  text-transform: uppercase;
+  color: var(--accent-color);
+}
+
+.dialog__form {
+  display: flex;
+  justify-content: center;
+}
+
+.dialog__button {
+  width: 293px;
+  height: 38px;
+  font-family: var(--accent-font);
+  font-size: var(--font-size-bottom);
+  text-transform: uppercase;
+}
+
+/* Эффекты для кнопок диалога */
 .dialog__button {
   position: relative;
   overflow: hidden;
-  transition: box-shadow 0.3s ease;
-  background-color: var(--bg-color);
+  background: transparent;
+  border: var(--border);
   cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Эффект фокуса - тень */
-.card__like-button:focus,
-.main__button:focus,
 .dialog__button:focus {
   outline: none;
-  box-shadow: 2px 2px 0 var(--accent-color, #000);
+  box-shadow: 2px 2px 0 var(--accent-color);
 }
 
-/* Псевдоэлемент для эффекта наведения */
-.card__like-button::before,
-.main__button::before,
 .dialog__button::before {
   content: "";
   position: absolute;
@@ -262,75 +359,19 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--accent-color, #000);
+  background-color: var(--accent-color);
   transform: translateX(-100%);
   transition: transform 0.5s ease-in-out;
   z-index: 0;
 }
 
-.card__like-button:hover::before,
-.main__button:hover::before,
 .dialog__button:hover::before {
   transform: translateX(0);
 }
 
-.card__like-button .button__text,
-.main__button .button__text,
 .dialog__button .button__text {
   position: relative;
   z-index: 1;
-  color: var(--label-text-color);
+  color: var(--bg-color);
   mix-blend-mode: difference;
-  transition: color 0.5s ease-in-out;
-}
-
-.main__button svg {
-  position: relative;
-  z-index: 1;
-}
-
-.main__button:hover svg rect {
-  fill: var(--label-text-color);
-  transition: fill 0.1s ease-in-out 0.4s;
-}
-
-.card__icon-button {
-  background: transparent;
-  border: 2px solid transparent;
-  transition: border-color 0.3s ease;
-  cursor: pointer;
-}
-
-.card__icon-button:focus-visible {
-  outline: none;
-  border-color: var(--accent-color, #000);
-}
-
-.card__icon-button:focus {
-  outline: none;
-}
-
-@media (width <= 375px) {
-  .header__container {
-    height: 327px;
-  }
-  
-  .main__button {
-    width: 306px;
-    height: 84px;
-    margin: 0 auto 100px;
-  }
-  
-  .card__content {
-    padding: 25px 25px 0;
-  }
-  
-  .card__actions {
-    padding: 25px;
-  }
-  
-  .dialog {
-    max-width: 341px;
-    margin: auto;
-  }
 }
