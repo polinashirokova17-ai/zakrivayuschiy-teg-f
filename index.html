@@ -378,7 +378,7 @@
         </button>
       </div>
     </section>
-    <div class="dialog" id="save-dialog" popover="auto">
+    <dialog class="dialog" id="save-dialog">
       <div class="dialog__content">
         <svg class="icon-floppy" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
           <g>
@@ -417,12 +417,12 @@
         </p>
       </div>
       <form method="dialog" class="dialog__form">
-        <button class="dialog__button" popovertarget="save-dialog" popovertargetaction="hide">
+        <button class="dialog__button">
           <span class="button__text">ОК</span>
         </button>
       </form>
-    </div>
-    <button class="main__button" popovertarget="save-dialog" popovertargetaction="show">
+    </dialog>
+    <button class="main__button" id="open-dialog">
       <svg class="icon-floppy" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
         <g>
           <path d="M0 0h2.154v2.154H0zM0 2.154h2.154v2.154H0zM0 4.308h2.154v2.154H0zM0 6.462h2.154v2.154H0z" />
