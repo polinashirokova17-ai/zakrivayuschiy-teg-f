@@ -1,2 +1,2 @@
 
-zakrivayuschiy-teg-f ссылка на GitHub репозиторий: https://polinashirokova17-ai.github.io/zakrivayuschiy-teg-f/ 
+zakrivayuschiy-teg-f ссылка на GitHub репозиторий: https://github.com/polinashirokova17-ai/zakrivayuschiy-teg-f.git
