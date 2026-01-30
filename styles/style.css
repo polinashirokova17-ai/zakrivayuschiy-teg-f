@@ -205,31 +205,19 @@
   width: 130px;
   height: 38px;
   padding: 9px 17px;
-}
-
-.card__like-button,
-.main__button,
-.dialog__button {
   position: relative;
   overflow: hidden;
-  background: transparent;
-  border: var(--border);
   cursor: pointer;
+  background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
 }
 
-/* Эффект фокуса для кнопок */
-.card__like-button:focus,
-.main__button:focus,
-.dialog__button:focus {
+.card__like-button:focus {
   outline: none;
   box-shadow: 2px 2px 0 var(--accent-color);
 }
 
-/* Псевдоэлемент для эффекта наведения */
-.card__like-button::before,
-.main__button::before,
-.dialog__button::before {
+.card__like-button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -242,43 +230,20 @@
   z-index: 0;
 }
 
-/* Эффект наведения */
-.card__like-button:hover::before,
-.main__button:hover::before,
-.dialog__button:hover::before {
+.card__like-button:hover::before {
   transform: translateX(0);
 }
 
-/* Общие стили для текста и иконок внутри кнопок */
-.card__like-button .button__text,
-.dialog__button .button__text,
-.main__button .button__text,
-.main__button .icon-floppy {
+.card__like-button .button__text {
   position: relative;
   z-index: 1;
-  color: var(--accent-color);
-  transition: color 0.5s ease-in-out;
-}
-
-/* Эффект наведения - белый текст/иконки на черном фоне */
-.main__button .icon-floppy {
-  position: relative;
-  z-index: 1;
-  width: 28px;
-  height: 28px;
-  fill: var(--accent-color);
-  transition: fill 0.5s ease-in-out;
-}
-
-.card__like-button:hover .button__text,
-.main__button:hover .button__text,
-.main__button:hover .icon-floppy {
-  color: var(--bg-color);
-  fill: var(--bg-color);
+  color: var(--label-text-color);
+  mix-blend-mode: difference;
 }
 
 .main__button {
   display: flex;
+  gap: 8px;
   background: transparent;
   border: var(--border);
   font-family: var(--accent-font);
@@ -287,77 +252,108 @@
   margin: 0 35px 100px;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   position: relative;
   overflow: hidden;
   background-color: var(--bg-color);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
 
-.text-design {
-  padding: 15px 10px;
+.main__button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--accent-color);
+}
+
+.main__button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--accent-color);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  z-index: 0;
+}
+
+.main__button:hover::before {
+  transform: translateX(0);
+}
+
+.main__button .button__text {
+  position: relative;
+  z-index: 1;
+  color: var(--label-text-color);
+  mix-blend-mode: difference;
+}
+
+.main__button .icon-floppy {
+  position: relative;
+  z-index: 1;
+  mix-blend-mode: revert;
+}
+
+.main__button:hover .icon-floppy {
+  fill: var(--bg-color);
+}
+
+.floppy-regular {
+  height: 39px;
+  width: 39px;
+  flex-shrink: 0;
+}
+
+.button__text {
   font-size: var(--font-size-bottom);
+  line-height: 1.5;
 }
 
 .dialog {
-  border: var(--border);
-  padding: 0;
-  background-color: var(--bg-color);
-  max-width: 357px;
-  margin: auto;
   display: none;
+  padding: 30px;
+  max-inline-size: 351px;
+  max-block-size: 191px;
+  border: var(--border);
+  background-color: var(--bg-color);
+  font-family: var(--accent-font);
 }
 
-/* Когда popover открыт */
 .dialog[open] {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding: 30px 40px;
-  top: 236px;
-  font-size: var(--font-size-bottom);
-}
-
-body:has(.dialog[open]) {
-  overflow: hidden;
-}
-
-
-/* Стили для backdrop через псевдоэлемент */
-.dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.75);
+  display: grid;
+  gap: 20px;
+  align-items: center;
 }
 
 .dialog__content {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .dialog__text {
-  font-family: var(--accent-font);
   font-size: var(--font-size-bottom);
-  line-height: 150%;
   text-transform: uppercase;
-  color: var(--accent-color);
+  line-height: 1.2;
 }
 
-.dialog__form {
-  display: flex;
-  justify-content: center;
+.dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
 }
 
 .dialog__button {
-  width: 293px;
-  height: 38px;
-  font-family: var(--accent-font);
-  font-size: var(--font-size-bottom);
-  text-transform: uppercase;
-  position: relative;
-  overflow: hidden;
   background: transparent;
   border: var(--border);
+  width: 100%;
+  height: 38px;
+  padding: 9px 17px;
+  position: relative;
+  overflow: hidden;
   cursor: pointer;
+  background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
+  justify-self: center;
 }
 
 .dialog__button:focus {
@@ -389,7 +385,7 @@ body:has(.dialog[open]) {
   mix-blend-mode: difference;
 }
 
-@media (width >= 378px) {
+@media (width >= 376px) {
   .header__container {
     height: 368px;
   }
@@ -404,7 +400,6 @@ body:has(.dialog[open]) {
 
   .main {
     margin-top: 20px;
-    margin-left: 20px;
   }
 
   .card__image-container {
@@ -417,5 +412,8 @@ body:has(.dialog[open]) {
     width: 335px;
     height: 55px;
     margin: 0 auto 100px;
+    font-size: var(--font-size-bottom);
+    gap: 8px;
   }
+
 }
