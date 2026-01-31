@@ -14,21 +14,11 @@
   min-inline-size: 320px;
   min-block-size: 100dvb;
   font-family: var(--text-font);
-  font-variation-settings:
-    "wght" var(--font-weight-normal),
-    "opsz" var(--font-size);
+  font-variation-settings: "wght" var(--font-weight-normal);
+  font-size: var(--font-size);
   padding: 100px 0 0;
-}
-
-.background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background-image: var(--page-bg-gradient);
   background-size: cover;
-  z-index: -1;
 }
 
 .header {
@@ -39,7 +29,7 @@
 }
 
 .header__container {
-  height: 327px;
+  padding: 120px 0;
   width: var(--main-width);
   margin: 0 auto;
   display: flex;
@@ -68,7 +58,7 @@
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 55px;
+  gap: 51px;
 }
 
 .card {
@@ -76,10 +66,13 @@
   width: var(--main-width);
   margin: 0 auto;
   background-color: var(--bg-color);
+  font-size: var(--font-size);
 }
 
 .card__title {
   padding: 4px 10px;
+  font-variation-settings: "wght" var(--font-weight-bold);
+  font-size: var(--font-size);
 }
 
 .card__image-container {
@@ -189,6 +182,7 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  height: 38px;
 }
 
 .card__icon-button:focus {
@@ -199,12 +193,9 @@
   border-color: var(--accent-color);
 }
 
-.card__like-button {
+.button {
   background: transparent;
   border: var(--border);
-  width: 130px;
-  height: 38px;
-  padding: 9px 17px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
@@ -212,12 +203,12 @@
   transition: box-shadow 0.3s ease;
 }
 
-.card__like-button:focus {
+.button:focus {
   outline: none;
   box-shadow: 2px 2px 0 var(--accent-color);
 }
 
-.card__like-button::before {
+.button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -230,22 +221,26 @@
   z-index: 0;
 }
 
-.card__like-button:hover::before {
+.button:hover::before {
   transform: translateX(0);
 }
 
-.card__like-button .button__text {
+.button .button__text {
   position: relative;
   z-index: 1;
   color: var(--label-text-color);
   mix-blend-mode: difference;
 }
 
+.card__like-button {
+  width: 130px;
+  height: 38px;
+  padding: 9px 17px;
+}
+
 .main__button {
   display: flex;
   gap: 8px;
-  background: transparent;
-  border: var(--border);
   font-family: var(--accent-font);
   width: 306px;
   height: 84px;
@@ -253,68 +248,42 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transition: none;
+}
+
+.main__button .icon-floppy {
+  width: 28px;
+  height: 28px;
+  fill: var(--accent-color);
   position: relative;
-  overflow: hidden;
-  background-color: var(--bg-color);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.main__button:focus {
-  outline: none;
-  box-shadow: 2px 2px 0 var(--accent-color);
-}
-
-.main__button::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--accent-color);
-  transform: translateX(-100%);
-  transition: transform 0.5s ease-in-out;
-  z-index: 0;
-}
-
-.main__button:hover::before {
-  transform: translateX(0);
+  z-index: 1;
+  transition: fill 0.3s ease;
 }
 
 .main__button .button__text {
   position: relative;
   z-index: 1;
-  color: var(--label-text-color);
-  mix-blend-mode: difference;
+  line-height: 1.5;
+  font-size: var(--font-size-bottom);
 }
 
-.main__button .icon-floppy {
-  position: relative;
-  z-index: 1;
-  mix-blend-mode: revert;
-}
-
+.main__button:hover .button__text,
 .main__button:hover .icon-floppy {
+  color: var(--bg-color);
   fill: var(--bg-color);
 }
 
 .floppy-regular {
   height: 39px;
   width: 39px;
+  object-fit: contain;
   flex-shrink: 0;
-}
-
-.button__text {
-  font-size: var(--font-size-bottom);
-  line-height: 1.5;
 }
 
 .dialog {
   display: none;
   padding: 30px;
   max-inline-size: 351px;
-  max-block-size: 191px;
   border: var(--border);
   background-color: var(--bg-color);
   font-family: var(--accent-font);
@@ -354,6 +323,8 @@
   background-color: var(--bg-color);
   transition: box-shadow 0.3s ease;
   justify-self: center;
+  font-size: var(--font-size-bottom);
+  text-transform: uppercase;
 }
 
 .dialog__button:focus {
@@ -399,7 +370,11 @@
   }
 
   .main {
-    margin-top: 20px;
+    margin-top: 36px;
+  }
+
+  .card {
+    gap: 10px;
   }
 
   .card__image-container {
@@ -416,4 +391,8 @@
     gap: 8px;
   }
 
+  .main__button .icon-floppy {
+    height: 21px;
+    width: 21px;
+  }
 }
