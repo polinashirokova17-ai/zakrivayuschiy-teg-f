@@ -231,6 +231,7 @@
   z-index: 1;
   color: var(--label-text-color);
   mix-blend-mode: difference;
+  font-size: var(--font-size-bottom);
 }
 
 .card__like-button {
@@ -255,10 +256,11 @@
 .main__button .icon-floppy {
   width: 28px;
   height: 28px;
-  fill: var(--accent-color);
   position: relative;
   z-index: 1;
   transition: fill 0.3s ease;
+  color: var(--label-text-color);
+  mix-blend-mode: difference;
 }
 
 .main__button .button__text {
@@ -266,12 +268,7 @@
   z-index: 1;
   line-height: 1.5;
   font-size: var(--font-size-bottom);
-}
-
-.main__button:hover .button__text,
-.main__button:hover .icon-floppy {
-  color: var(--bg-color);
-  fill: var(--bg-color);
+  color: var(--label-text-color);
   mix-blend-mode: difference;
 }
 
@@ -316,11 +313,9 @@
 .dialog__button {
   width: 100%;
   height: 38px;
-  padding: 9px 17px;
 }
 
 @media (width >= 376px) {
-  
   .header__title {
     font-size: clamp(3.5rem, 3.7rem + 0.5vw, 4.0625rem);
   }
